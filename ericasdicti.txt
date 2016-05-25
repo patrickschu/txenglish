@@ -1,0 +1,48 @@
+DH:v fricative
+HH:vl fricative
+CH:vl affricate
+JH:v affricate
+AY1:vowel
+None:coda
+B:v stop
+D:v stop
+G:v stop
+F:vl fricative
+K:vl stop
+M:nasal
+L:liquid
+N:nasal
+P:vl stop
+S:vl fricative
+R:liquid
+T:vl stop
+W:glide
+V:v fricative
+Y:glide
+Z:v fricative
+ER0:vowel
+SH:vl fricative
+DH:v fricative
+IH0:vowel
+B:v stop
+JH:v affricate
+NG:nasal
+TH:vl fricative
+None:coda
+CH:vl affricate
+D:v stop
+G:v stop
+F:vl fricative
+K:vl stop
+M:nasal
+L:liquid
+N:nasal
+P:vl stop
+S:vl fricative
+R:liquid
+T:vl stop
+V:v fricative
+Z:v fricative
+ER0:vowel
+IY0:vowel
+AA2:vowel
