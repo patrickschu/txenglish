@@ -4,7 +4,7 @@ install.packages('ggplot2')
 
 
 #this needs to take number of differentiators, then output plots
-ggvowels=function(dataset, title, normalized_F1, normalized_F2, separator)
+ggvowels=function(dataset, title, normalized_F1, normalized_F2, separator=...)
 {
 # we turn aorund the levels of AgeGrp so we can read the plot better
 dataset[["AgeGrp"]]=factor(dataset[["AgeGrp"]], c("Younger", "Middle", "Older"));

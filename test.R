@@ -1,43 +1,55 @@
 
 
+test=function(thing, ...)
+{
+	substitute(alist(...))
+}
+
+
+test('dfdf', assi, muschi)
+
 ds=read.csv('/Users/ps22344/Desktop/canada_final_1121.csv');
 print (nrow(ds));
 cat ("\n\n\nSTART");
 ggvowels=function(dataset, vowel, F1, F2,  ...) 
 
 {
-
-
+	
+vowel=deparse(substitute(vowel))
+F1=deparse(substitute(F1))
+F2=deparse(substitute(F2))
+indi_variables=substitute(list(...));
 header="\n------\n"
 #summary of dataset
 vowels=levels(dataset[[vowel]]);
 cat (sprintf ("%sWe are working with %d vowel(s):\n", header, length(vowels)));
 print (levels(dataset[[vowel]]));
-indi_variables=alist(...);
-print(indi_variables);
-eval(indi_variables);
 
+cat (sprintf ('%sWe are working with %s independent variable(s):\n', header, "XXXXX"));
+for (var in deparse(indi_variables))
+ 	{
+	 writeLines(unlist(lapply(var, paste, collapse=" ")));
+	 }
 
-
-
-#cat (sprintf ('%sWe are working with %d independent variable(s):\n', header, length(indi_variables)));
-# for (var in indi_variables)
-# {
-	# print(as.character(var));
-	# cat (levels(dataset[[as.character(var)]]), "\n")
-# }
-
-#computing means
-#we need a tapply over all the indies
-#r=with (ds, tapply(F1labov, list(ETHNICITY), mean) )
-#F1table=with (dataset, tapply(F1labov, indi_variables, mean));
-
-#F2table=tapply(F2~indi)
-	
+for (v in vowels){
+	print (v);
+	voweldataset=dataset[dataset[[vowel]]==v,];
+	print (paste("Tokens:", nrow(voweldataset)));
+	#computing means
+	F1means=with (voweldataset, aggregate(F1, eval(indi_variables,voweldataset), FUN=mean));
+	print (F1means);
+	F2means=with (voweldataset, aggregate(F2, eval(indi_variables, voweldataset), FUN=mean))
+	print (F2means);
+	#and stdevs
+	F1sd=with (voweldataset, aggregate(F1, eval(indi_variables, voweldataset), FUN=sd));
+	print (F1sd);
+	F2sd=with (voweldataset, aggregate(F2, eval(indi_variables, voweldataset), FUN=sd))
+	print (F2sd)
+	}	
 }
 #these are the levels we iterate over
 
-ggvowels(ds, 'VOWEL', 'F1labov', 'F2labov', 'ETHNICITY')
+ggvowels(ds, VOWEL, F1labov, F2labov, ETHNICITY)
 
 
 #take dataset plus variables, calculate all interactions plus plot
