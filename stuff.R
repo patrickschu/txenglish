@@ -32,11 +32,16 @@ my_ellipsis_function(a=1:10,b=11:20,c=21:30)
 tee=function(dataset, var)
 	{
 	var=eval(substitute(var), dataset);
-	print (str(var));
 	with(dataset, aggregate(F1, list(eval(substitute(var), dataset)), mean));
-	#print (str(substitute(var)))
 	}
-	
+
+tee=function(dataset, var)
+	{
+	var=eval(substitute(var), dataset);
+	with(dataset, aggregate(F1, list(var), dataset)), mean;
+	}
+
+
 tee(ds, ETHNICITY)
 # # Anonymous function syntax
 # (function(x) x * 10)(10)
