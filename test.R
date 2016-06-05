@@ -1,3 +1,8 @@
+#install.packages(c("vowels", "ggplot2", "lme4"))
+
+library(vowels)
+library(ggplot2)
+library(lme4)
 
 
 test=function(thing, ...)
@@ -46,7 +51,8 @@ print (levels(dataset[[vowel]]));
 outputframe=data.frame(as.list(as.character(user_vars[-1L])),"F1means", "F1sd", "F2means", "F2sd", vowel, check.names=FALSE)[character(0),];
 print ("OUTTTI");
 print (str(outputframe));
-#iterate over vowels
+
+##CREATING DATA
 for (v in vowels){
 	print (v);
 	voweldataset=dataset[dataset[[vowel]]==v,];
@@ -75,14 +81,34 @@ for (v in vowels){
 	totaldata[,vowel]=v;
 	print (str(totaldata));
 	#this is dangerous, but good enough for now
-	names(totaldata) <- names(outputframe);
+	names(totaldata) = names(outputframe);
 	outputframe=rbind(outputframe, totaldata);
-	print (outputframe);
+	return (outputframe);
 	}	
-}
-#these are the levels we iterate over
+##PLOTTING
+##do we make a do.call??
+title="assi"
+gg=ggplot(data=outputframe, aes_string(x="F2", y="F1"));
+gg+
+scale_y_reverse()+
+scale_x_reverse()+
+coord_cartesian()+
+theme_bw()+
+#ggtheme
+#theme_classic()+
+#we try to add points for the mean for each vowel, just for labeling purposes
+geom_text(data=outputframe, aes(x=outputframe$F2means, y=outputframe$F1means, label=vowel), size=3)+
+#we add actual datapoints
+geom_point(data=outputframe, aes(x=F2means, y=F1means, colour=SEPARATOR, label=VOWEL, group=VOWEL), size=6)+
+#ah! we need a title
+ggtitle(paste(title, "\n"));
+ggsave(paste(title, ".png", sep=""), width=8, height=5);
 
-ggvowels(ds, VOWEL, F1labov, F2labov, ETHNICITY, GENDER)
+
+}
+
+
+ggvowels(ds, VOWEL, F1labov, F2labov, AgeGrp, LOCATION)
 
 
 #take dataset plus variables, calculate all interactions plus plot
