@@ -43,7 +43,7 @@ vowels=levels(dataset[[vowel]]);
 print (levels(dataset[[vowel]]));
 #cat (sprintf ('%sWe are working with %s independent variable(s):\n', header, length(deparse(list(...)))));
 
-outputframe=data.frame(as.list(as.character(user_vars[-1L])))[factor(0),];
+outputframe=data.frame(as.list(as.character(user_vars[-1L])),"F1means", "F1sd", "F2means", "F2sd", vowel, check.names=FALSE)[character(0),];
 print ("OUTTTI");
 print (str(outputframe));
 #iterate over vowels
@@ -54,7 +54,6 @@ for (v in vowels){
 	indi_variables=eval(substitute(list(...)), voweldataset);
 	#computing means
 	F1means=with(voweldataset, aggregate(F1, indi_variables, mean));
-	F1means$vowel=v;
 	colnames(F1means)=c(as.character(user_vars[-1L]), "F1means");
 
 	F1sd=with(voweldataset, aggregate(F1, indi_variables, sd));
@@ -64,13 +63,21 @@ for (v in vowels){
 	colnames(F2means)=c(as.character(user_vars[-1L]), "F2means");
 
 	F2sd=with(voweldataset, aggregate(F2, indi_variables, sd));
-	
-
 	colnames(F2sd)=c(as.character(user_vars[-1L]), "F2sd");
-	F2sd[,vowel]=v;
-	print (F2sd);
-	print (length(F2sd));
-	merge(F1means, F1sd, by=as.character(user_vars[-1L]))
+	
+	#print (F2sd);
+	#print (length(F2sd));
+	#nicer alternatives here: http://stackoverflow.com/questions/14096814/r-merging-a-lot-of-data-frames
+
+	F1data=merge(F1means, F1sd, by=as.character(user_vars[-1L]));
+	F2data=merge(F2means, F2sd, by=as.character(user_vars[-1L]));
+	totaldata=merge(F1data, F2data, by=as.character(user_vars[-1L]))
+	totaldata[,vowel]=v;
+	print (str(totaldata));
+	#this is dangerous, but good enough for now
+	names(totaldata) <- names(outputframe);
+	outputframe=rbind(outputframe, totaldata);
+	print (outputframe);
 	}	
 }
 #these are the levels we iterate over
