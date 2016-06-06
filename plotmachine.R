@@ -5,15 +5,7 @@ library(ggplot2)
 library(lme4)
 
 
-
-
-
-
-ds=read.csv('/Users/ps22344/Downloads/normeddata_context_labels_added.csv', check.names=FALSE);
-# ds=read.csv('C:\\Users\\ps\\My Documents\\Github\\canadavowels\\canada_final_1121.csv')
-print (colnames(ds));
-
-ggvowels=function(dataset, vowel, F1, F2,  ..., plot_title="") 
+plotmachine=function(dataset, vowel, F1, F2,  ..., plot_title="") 
 
 {
 cat ("\n\n\nSTART");
@@ -122,10 +114,5 @@ for (entry in user_vars_list[-length(user_vars_list)])
 }
 
 
-ggvowels(ds, vowel, F1, F2, gender, plot_title="TEST")
-
-
-#take dataset plus variables, calculate all interactions plus plot
-#how to set plot settings 
 
 
