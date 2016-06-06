@@ -26,11 +26,11 @@ test(vollassi, superassi, spast)
 
 
 
-#ds=read.csv('/Users/ps22344/Desktop/canada_final_1121.csv');
-ds=read.csv('C:\\Users\\ps\\My Documents\\Github\\canadavowels\\canada_final_1121.csv')
+ds=read.csv('/Users/ps22344/Desktop/canada_final_1121.csv');
+# ds=read.csv('C:\\Users\\ps\\My Documents\\Github\\canadavowels\\canada_final_1121.csv')
 print (nrow(ds));
 
-ggvowels=function(dataset, vowel, F1, F2,  ...) 
+ggvowels=function(dataset, vowel, F1, F2,  ..., plot_title="") 
 
 {
 cat ("\n\n\nSTART");
@@ -49,8 +49,8 @@ print (levels(dataset[[vowel]]));
 #cat (sprintf ('%sWe are working with %s independent variable(s):\n', header, length(deparse(list(...)))));
 
 outputframe=data.frame(as.list(as.character(user_vars[-1L])),"F1means", "F1sd", "F2means", "F2sd", vowel, check.names=FALSE)[character(0),];
-print ("OUTTTI");
-print (str(outputframe));
+
+#print (str(outputframe));
 
 ##CREATING DATA
 for (v in vowels){
@@ -79,36 +79,67 @@ for (v in vowels){
 	F2data=merge(F2means, F2sd, by=as.character(user_vars[-1L]));
 	totaldata=merge(F1data, F2data, by=as.character(user_vars[-1L]))
 	totaldata[,vowel]=v;
-	print (str(totaldata));
-	#this is dangerous, but good enough for now
-	names(totaldata) = names(outputframe);
+	#print (str(totaldata));
+		#this is dangerous, but good enough for now
+	
 	outputframe=rbind(outputframe, totaldata);
-	return (outputframe);
-	}	
+	
+	}
+names(outputframe)=names(totaldata) ;
+print (outputframe);	
 ##PLOTTING
 ##do we make a do.call??
-title="assi"
-gg=ggplot(data=outputframe, aes_string(x="F2", y="F1"));
-gg+
-scale_y_reverse()+
-scale_x_reverse()+
-coord_cartesian()+
-theme_bw()+
-#ggtheme
-#theme_classic()+
-#we try to add points for the mean for each vowel, just for labeling purposes
-geom_text(data=outputframe, aes(x=outputframe$F2means, y=outputframe$F1means, label=vowel), size=3)+
-#we add actual datapoints
-geom_point(data=outputframe, aes(x=F2means, y=F1means, colour=SEPARATOR, label=VOWEL, group=VOWEL), size=6)+
-#ah! we need a title
-ggtitle(paste(title, "\n"));
-ggsave(paste(title, ".png", sep=""), width=8, height=5);
+meanies=aggregate(list('F1means'=outputframe[['F1means']],'F2means'=outputframe[['F2means']]),list('VOWEL'=outputframe[[vowel]]), mean);
+print (meanies);
+user_vars_list=as.list(as.character(user_vars[-1L]))
 
+if (length(user_vars_list) == 1)
+{
+for (entry in user_vars_list)
+	{
+	print (entry);
+	canvas=ggplot(outputframe, aes(F2means, F1means));
+	canvas=
+	canvas+
+	theme(legend.title=element_blank())+
+	scale_y_reverse()+
+	scale_x_reverse()+
+	geom_text(data=meanies, aes(F2means, F1means, label=VOWEL))+
+	geom_point(aes(colour=outputframe[[entry]]), size=4.5)+
+	labs(title =plot_title) 
+	print(canvas);
+	ggsave(paste(plot_title,"_",entry,"_",next_entry, ".png", sep=""), width=8, height=5);
+	}	
+}
+
+if (length(user_vars_list) > 1)
+{
+for (entry in user_vars_list[-length(user_vars_list)])
+	{
+	print (entry);
+	#print (as.list(as.character(user_vars[-1L]))[1])
+	entry_index=match(entry, as.list(as.character(user_vars[-1L])))
+	print (entry_index)
+	next_entry=as.character(user_vars[-1L])[entry_index+1];
+	print (next_entry);
+	canvas=ggplot(outputframe, aes(F2means, F1means));
+	canvas=
+	canvas+
+	theme(legend.title=element_blank())+
+	scale_y_reverse()+
+	scale_x_reverse()+
+	geom_text(data=meanies, aes(F2means, F1means, label=VOWEL))+
+	geom_point(aes(colour=outputframe[[entry]], shape=outputframe[[next_entry]]), size=4.5)+
+	labs(title =plot_title) 
+	print(canvas);
+	ggsave(paste(plot_title,"_",entry,"_",next_entry, ".png", sep=""), width=8, height=5);
+	}
+}	
 
 }
 
 
-ggvowels(ds, VOWEL, F1labov, F2labov, AgeGrp, LOCATION)
+ggvowels(ds, VOWEL, F1labov, F2labov, AgeGrp, LOCATION, GENDER,plot_title="ASSIKIND")
 
 
 #take dataset plus variables, calculate all interactions plus plot
