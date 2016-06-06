@@ -1,7 +1,10 @@
 #Using the plotmachine
 
+The plotmachine computes F1 and F2 means for any number of predictors and then plots those using ggplot.
+
 Download it [here](https://github.com/patrickschu/txenglish/blob/master/plotmachine/plotmachine.R)
-The plot machine takes the following input:
+
+The plotmachine takes the following input:
 
     plotmachine=function(dataset, vowel, F1, F2,  ..., plot_title=" ") 
     
