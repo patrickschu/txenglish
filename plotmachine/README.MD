@@ -1,4 +1,6 @@
 #Using the plotmachine
+
+Download it [here](https://github.com/patrickschu/txenglish/blob/master/plotmachine/plotmachine.R)
 The plot machine takes the following input:
 
     plotmachine=function(dataset, vowel, F1, F2,  ..., plot_title=" ") 
@@ -13,7 +15,7 @@ The plot machine takes the following input:
 
 For one independent variable, it prints out the means by category, outputs and saves a plot as a png file. For several independent variables, it prints out means and creates plots for all combinations of variables. It returns the dataframe of means.
 
-Thus, for a dataset called *texasenglish*, this plots the formants by gender for all vowels that are in a column called *VOWEL*. It uses the data found in *F1NORMALIZED* and *F2NORMALIZED*.
+Thus, for a dataset called *texasenglish*, this plots the formants by gender for all vowels that are in a column called *VOWEL*. It uses the data found in *F1NORMALIZED* and *F2NORMALIZED*. Note that none of the input besides the `plot_title` should be in quotation marks. 
 
     plotmachine(texasenglish, VOWEL, F1NORMALIZED, F2NORMALIZED, GENDER, plot_title="Gender differences in Texas English")
 
@@ -25,4 +27,4 @@ It will create these plots: gender x ethnicity, gender x age group, ethnicity x 
 
 Note that you need to have the packages vowels, ggplot2 and lme4 installed for this to work. 
 
-To do: return dataframe
+To do: return dataframe, check for libraries
