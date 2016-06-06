@@ -1,7 +1,9 @@
-ds=read.csv('/Users/ps22344/Desktop/canada_final_1121.csv');
-print (nrow(ds));
-
-
+#ds=read.csv('/Users/ps22344/Desktop/canada_final_1121.csv');
+#print (nrow(ds));
+#t=data.frame(list("assdsi", "doofie"), c(0,2000))
+t=data.frame(list("assdsdssi", "doosdsdfie"))
+t
+str(t)
 # tee=function(dataset, ...)
 	# {
 	# # print it out
