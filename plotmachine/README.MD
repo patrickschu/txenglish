@@ -9,11 +9,11 @@ The plotmachine takes the following input:
     plotmachine=function(dataset, vowel, F1, F2, ..., plot_title=" ") 
     
     Arguments:
-    dataset --- the dataset you're working with. Needs to be created first, e.g. by reading in a spreadsheet with read.csv()
-    vowel --- the name of the column within this dataset that contains the vowel labels
-    F1 --- the name of the column within this dataset that contains the F1 measurements
-    F2 --- the name of the column within this dataset that contains the F2 measurements
-    ... --- any number of independent variables that you want to plot 
+    dataset --- the dataset you're working with. Needs to be created first, e.g. by reading in a spreadsheet with read.csv().
+    vowel --- the name of the column within this dataset that contains the vowel labels.
+    F1 --- the name of the column within this dataset that contains the F1 measurements.
+    F2 --- the name of the column within this dataset that contains the F2 measurements.
+    ... --- any number of independent variables that you want to plot .
     title --- the title of your plot, also part of the name of the file your plot will be saved as. Defaults to " ".
 
 For one independent variable, it prints out the means by category, outputs and saves a plot as a png file. For several independent variables, it prints out means and creates plots for all combinations of variables. It returns the dataframe of means.
