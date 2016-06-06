@@ -1,5 +1,5 @@
 #Using the plotmachine
-The plot machine takes the following inpu
+The plot machine takes the following input:
 
     plotmachine=function(dataset, vowel, F1, F2,  ..., plot_title=" ") 
     
@@ -11,8 +11,10 @@ The plot machine takes the following inpu
     ... --- any number of independent variables that you want to plot 
     title --- the title of your plot, also part of the name of the file your plot will be saved as. Defaults to " ".
 
-Thus
+Thus, for a dataset called *texasenglish*, this plots the formants by gender for all vowels that are in a column called *VOWEL*. It uses the data found in *F1NORMALIZED* and *F2NORMALIZED*.
 
+    plotmachine(texasenglish, VOWEL, F1NORMALIZED, F2NORMALIZED, GENDER, plot_title="Gender differences in Texas English")
     
+    plotmachine(texasenglish, VOWEL, F1NORMALIZED, F2NORMALIZED, GENDER, plot_title="Gender differences in Texas English")
 
 Note that you need to have the packages vowels, ggplot2 and lme4 installed for this to work. 
