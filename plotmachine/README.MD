@@ -6,7 +6,7 @@ Download it [here](https://github.com/patrickschu/txenglish/blob/master/plotmach
 
 The plotmachine takes the following input:
 
-    plotmachine=function(dataset, vowel, F1, F2,  ..., plot_title=" ") 
+    plotmachine=function(dataset, vowel, F1, F2, ..., plot_title=" ") 
     
     Arguments:
     dataset --- the dataset you're working with. Needs to be created first, e.g. by reading in a spreadsheet with read.csv()
@@ -18,10 +18,11 @@ The plotmachine takes the following input:
 
 For one independent variable, it prints out the means by category, outputs and saves a plot as a png file. For several independent variables, it prints out means and creates plots for all combinations of variables. It returns the dataframe of means.
 
-Thus, for a dataset called *texasenglish*, this plots the formants by gender for all vowels that are in a column called *VOWEL*. It uses the data found in *F1NORMALIZED* and *F2NORMALIZED*. Note that none of the input besides the `plot_title` should be in quotation marks. 
+Thus, for a dataset called *texasenglish*, this plots the formants by gender for all vowels that are in a column called *VOWEL*. 
 
     plotmachine(texasenglish, VOWEL, F1NORMALIZED, F2NORMALIZED, GENDER, plot_title="Gender differences in Texas English")
 
+It uses the data found in *F1NORMALIZED* and *F2NORMALIZED*. Note that none of the input besides the `plot_title` should be in quotation marks. 
 Note that you can feed it as many independent variables as you like. This example will calculate means by gender, ethnicity and agegroup: 
     
     plotmachine(texasenglish, VOWEL, F1NORMALIZED, F2NORMALIZED, GENDER, ETHNICITY, AGEGROUP, plot_title="Random vowel chart")
