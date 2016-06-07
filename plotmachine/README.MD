@@ -2,7 +2,7 @@
 
 The plotmachine computes F1 and F2 means for any number of predictors and then plots those using ggplot.
 
-Download it [here](https://raw.githubusercontent.com/patrickschu/txenglish/master/plotmachine/plotmachine.R). Download as a text file and run it in R. 
+Download it [here](https://raw.githubusercontent.com/patrickschu/txenglish/master/plotmachine/plotmachine.R). Save as a text file and run it in R. 
 
 The plotmachine takes the following input:
 
