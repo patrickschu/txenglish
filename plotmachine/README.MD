@@ -1,4 +1,4 @@
-#Using the plotmachine
+# Using the plotmachine
 
 The plotmachine computes F1 and F2 means for any number of predictors and then plots those using ggplot.
 
